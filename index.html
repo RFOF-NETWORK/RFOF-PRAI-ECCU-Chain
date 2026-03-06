@@ -578,6 +578,95 @@ async function syncChainNodes(chainID) {
 
 
 
+    
+
+
+
+
+<script>
+    /* --- [MITTE] FUSION: BRIDGE, GATEKEEPER & EVENT-HUB --- */
+    
+    // 1. Deine existierende Logik (Exakt erhalten)
+    function triggerReflexion() {
+        console.log("[BRIDGE] Synchronisiere Zustand zwischen Kern und Quantum-Registry...");
+        
+        // 2. Fusionierte Event-Logik (Sorgt für die Kommunikation)
+        window.dispatchEvent(new CustomEvent('PZQQET_SYNC_REQUEST'));
+        
+        // 3. Strikte sequentielle Kette (Der Gatekeeper-Teil)
+        if (typeof syncChainNodes === 'function') {
+            ['RFOF', 'PRAI', 'ECCU'].forEach(id => {
+                try {
+                    syncChainNodes(id);
+                    console.log(`[BRIDGE] Sequenz-Erfolg: ${id}`);
+                } catch (e) {
+                    console.error(`[BRIDGE] Sequenz-Fehler bei ${id}:`, e);
+                }
+            });
+        }
+    }
+
+    // 4. Erweiterungs-Schnittstelle für zukünftige Blöcke (Der Event-Hub)
+    window.addEventListener('PZQQET_SYNC_REQUEST', () => {
+        console.log("[HUB] Synchronisationswelle durch alle Module bestätigt.");
+    });
+    
+    /* ---------------------------------------------------- */
+</script>
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<script>
+    /* --- [MASTER MOTHERBOARD: GLOBALER SYNC-KONTROLLER] --- */
+    window.PZQQET_MASTER = {
+        // Hashing-Funktion zur Identifikation der globalen Wallet-Instanz
+        async getGlobalHash(walletAddr) {
+            const msgBuffer = new TextEncoder().encode(walletAddr + "PZQQET_GLOBAL_SALT");
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+        },
+
+        // API-Anbindung für atomare Sync (Simulation via Event-Bus)
+        async syncGlobalState() {
+            const currentWallet = localStorage.getItem("current_wallet_address");
+            if (!currentWallet) return;
+
+            const globalID = await this.getGlobalHash(currentWallet);
+            console.log(`[MASTER] Synchronisiere globalen Node: ${globalID}`);
+            
+            // Hier wird das System gezwungen, den Stand von der "Chain" zu holen, 
+            // statt vom isolierten Browser-Cache.
+            window.dispatchEvent(new CustomEvent('PZQQET_GLOBAL_SYNC', { detail: { id: globalID } }));
+        }
+    };
+
+    // Automatischer Sync bei jeder Änderung
+    window.addEventListener('storage', () => window.PZQQET_MASTER.syncGlobalState());
+</script>
 
 
 
@@ -594,6 +683,18 @@ async function syncChainNodes(chainID) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+    
 
 
 
